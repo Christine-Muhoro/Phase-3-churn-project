@@ -45,22 +45,32 @@ Next was checking for duplicated and missing values in both training and test se
 For both the training and test set separately, I handled numeric data using normalization and categric data using one hot encoding then combined the two back together.  
 Also checked for class imbalance and balanced the classes using SMOTE.  
 
-## **Objective 1 : Building the Classifier**
-### Logistic Regression Model
+## **Modeling and Evaluation**
+### **Objective 1 : Building the Classifier**
+#### Logistic Regression Model
 Trained a baseline model for logistic regression with only random state of 42 as the parameter. This model had no overfitting and undeitting according to log loss. It also had a 76% recall and a 76% accuracy.  
 Also tuned the previous logistic regression model with saga for solver, elasticnet for penalty and l1-ratio of 0.5 to control and balance L1 and L2 regularization. This model had a 77% recall and a 77% accuracy.   
-### Decision Tree Classifier
+#### Decision Tree Classifier
 Trained a baseline decision tree classifier with only random state of 42 as the parameter. This model had a 77% recall and a 91% accuracy.  
 Tuned the above decision tree classifier with the best hyperparameters from a grid search cross-validation. This model had a 81% recall and a 94% accuracy.  
 >From the above model training and testing, the best model so far according to both recall and accuracy is the tuned decision tree classifier.
 
-## **Objective 2 : Features that Highly Influence Churn**
+### **Objective 2 : Features that Highly Influence Churn**
 The best model so far being the tuned decision tree classifier, `feature_importances_` i.e feature importance values were taken. The highest values were used to indicate strongest influence features(factors) on churn.  
 The features influencing churn greatly are `total anytime minutes`, `customer service calls` and `interational plan_yes`.  
 
-## **Objective 3 : Best Recall Score i.e Minimize False Negatives(Missing a churning customer)**
+### **Objective 3 : Best Recall Score i.e Minimize False Negatives(Missing a churning customer)**
 Evaluated all the models created using accuracy, recall, precision scores and f1-score and created a table(dataframe) with these results.  
 From the created table(dataframe), the recall score has been increasing as I create more models and the model with less false negative classification is the tuned decision tree with recall score of 81%. 
 
-## **Objective 4 : Best Accuracy Score i.e Highly Accurate Model**
+### **Objective 4 : Best Accuracy Score i.e Highly Accurate Model**
 From the same created table(dataframe), the accuracy score has been increasing as I create more models and the highly accurate model is the tuned decision tree with an accuracy of 94%. 
+
+## **Recommendations**
+1. A classifier that predicts churn well was created and can hence be used for early identification of churn cases. I recommend deploying this model in real-time systems so that churns are flagged immediately.
+2. Factors(features) that highly influence churn are such as customer service calls, total anytime minutes and international plan. I recommend focusing prevention strategies on these high impact factors. 
+3. Since high recall reduces false negatives i.e chance of missijng a churn, I recommend prioritizing recall as a key performaance metric when tunig future models.
+
+## **Conclusion**
+This project successfuly addressed the business problem of customer churn at SyriaTel by developing a strong and highly accurate predictive model. Through model building and evaluation, the study identified key churn drivers and achieved strong performance particularly in recall and accuracy.  
+The insights provided provide SyriaTel with the ability of early identification of customer churns and to implement prevention strategies preventing the churn. This can therefore reduce revenue loss and support the business's growth in the telecommunications industry.
